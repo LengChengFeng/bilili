@@ -9,7 +9,7 @@ import {
 import CommentIcon from "../../../../assets/image/comment.png";
 import Share from "../../../../assets/image/share.png";
 import Collect from "../../../../assets/image/collect.png";
-
+import Back from "../../../../assets/image/back.png";
 import Like from "../../../../assets/image/like.png";
 import Dislike from "../../../../assets/image/dislike.png";
 
@@ -43,7 +43,7 @@ export default function index() {
     navigate(-1);
   };
   return (
-    <div>
+    <div style={{ height: "100vh - 40px" }}>
       <div className="video" style={{ position: "relative" }}>
         {mvList && (
           <video
@@ -58,12 +58,12 @@ export default function index() {
           onClick={() => goback()}
           style={{
             position: "absolute",
-            top: "20px",
-            left: "0",
+            top: "0",
+            left: "10px",
             color: "white",
           }}
         >
-          返回
+          <img src={Back} alt="" style={{ height: "6vw", width: "6vw" }} />
         </div>
       </div>
 

@@ -15,10 +15,6 @@ const videoList = (props: any) => {
     } else {
       navigate(`/mv/${item.mv}`);
     }
-
-    // getSongMv({ id: item.mv }).then((res) => {
-    //   console.log(res);
-    // });
   };
   return (
     <div
@@ -36,7 +32,7 @@ const videoList = (props: any) => {
             key={index}
             style={{
               width: "48%",
-              height: "200px",
+              height: "45vw",
               marginRight: "1%",
               marginBottom: "15px",
               borderRadius: "10px",
@@ -47,7 +43,7 @@ const videoList = (props: any) => {
               <img
                 src={item.al.picUrl}
                 alt=""
-                style={{ width: "100%", height: "160px", borderRadius: "10px" }}
+                style={{ width: "100%", height: "42vw", borderRadius: "10px" }}
               />
               <div
                 className="duration"
@@ -78,7 +74,6 @@ const videoList = (props: any) => {
                 )}
               </div>
             </div>
-
             <div
               className="author"
               style={{

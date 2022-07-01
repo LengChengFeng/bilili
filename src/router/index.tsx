@@ -5,6 +5,8 @@ const Search = React.lazy(() => import("../views/home/cpn/search"));
 const SongMv = React.lazy(() => import("../views/home/cpn/SongMv"));
 
 const Content = React.lazy(() => import("../views/content"));
+const SongList = React.lazy(() => import("../views/content/cpn/songs"));
+
 const Buy = React.lazy(() => import("../views/buy"));
 const Mine = React.lazy(() => import("../views/mine"));
 export const routes = [
@@ -35,6 +37,10 @@ export const routes = [
   {
     path: "/mv/:id",
     element: <SongMv />,
+  },
+  {
+    path: "/song/:id",
+    element: <SongList />,
   },
 ];
 

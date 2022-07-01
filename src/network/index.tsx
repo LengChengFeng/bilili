@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { message, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import "./index.css";
-const baseURL = "https://music.motxj.com/";
+const baseURL = "http://localhost:4000";
 const service = axios.create({
   timeout: 50000, // 请求超时时间
   baseURL,

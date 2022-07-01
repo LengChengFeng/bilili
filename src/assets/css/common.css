@@ -1,5 +1,5 @@
 body {
-    font-size: 1vw;
+    font-size: 2vw;
 }
 .ant-input{
     background-color: #f2f3f5  !important;
@@ -9,4 +9,7 @@ body {
 }
 .adm-tabs{
     --active-line-color: #ee6a96!important;
+}
+.song-list:nth-child(odd) {
+    background-color: #f7f7f7;
 }
