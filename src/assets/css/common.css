@@ -1,0 +1,12 @@
+body {
+    font-size: 1vw;
+}
+.ant-input{
+    background-color: #f2f3f5  !important;
+}
+.adm-tabs-tab-active{
+    color: #ee6a96 !important;
+}
+.adm-tabs{
+    --active-line-color: #ee6a96!important;
+}
