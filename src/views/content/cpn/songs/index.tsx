@@ -1,20 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useLocation, useParams } from "react-router";
-import { getSingerMuisc } from "../../../../network/content";
+import { getSingerMusic ,getMusicUrl} from "../../../../network/content";
 import formatTime from "../../../../utils/format";
 import Play from "../../../../assets/image/play.png";
+import Pause from "../../../../assets/image/pause.png"
+import { Toast } from "antd-mobile";
 export default function index() {
   const [songList, setsongList] = useState<any>();
+  const [musicUrl,setMusicUrl] = useState<string>("") 
+  const [currentIndex,setCurrentIndex] = useState<any>(-999)
   const params = useParams();
   const info: any = useLocation();
-  console.log(location);
-
+  const audioRef = useRef<any>()
   useEffect(() => {
-    getSingerMuisc({ id: params.id }).then((res: any) => {
-      console.log(res);
+    getSingerMusic({ id: params.id }).then((res: any) => {
       setsongList(res.songs);
     });
   }, []);
+  const playMusic = (item:any,index:any) => {
+    getMusicUrl({id:item.id}).then((res:any)=>{
+      if(res.data[0].url === null) {
+        Toast.show({
+          content:"没有该音频~"
+        })
+      }
+      if(index === currentIndex) {
+        audioRef.current.pause()
+        setCurrentIndex(999)
+      }else {
+       audioRef.current && audioRef.current.play()
+        
+        setCurrentIndex(index)
+      }
+     
+      setMusicUrl(res.data[0].url)
+    })
+  }
   return (
     <div style={{ padding: "10px 20px" }}>
       <h2>{info.state.name}</h2>
@@ -31,17 +52,17 @@ export default function index() {
             return (
               <div
                 className="song-list"
-                key={item.id}
+                key={index}
                 style={{ display: "flex", padding: "10px", marginTop: "2vw" }}
               >
                 <div className="index" style={{ width: "10%" }}>
                   {index}
                 </div>
-                <div className="play" style={{ width: "10%" }}>
+                <div className="play" style={{ width: "10%" }} onClick={()=>playMusic(item,index)}>
                   <img
-                    src={Play}
+                    src={currentIndex !== index ? Play : Pause}
                     alt=""
-                    style={{ width: "5vw", height: "5vw" }}
+                    style={{ width: "5vw", height: "5vw",cursor:"pointer" }}
                   />
                 </div>
                 <div
@@ -75,6 +96,9 @@ export default function index() {
               </div>
             );
           })}
+      </div>
+      <div className="play-music" style={{position:"fixed",bottom:"0",right:"0",width:"100%",zIndex:"999999999"}}>
+        {musicUrl&& <audio ref={audioRef} src={musicUrl} autoPlay controls style={{width:"100%"}}></audio>}
       </div>
     </div>
   );

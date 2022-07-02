@@ -10,7 +10,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "http://api.bilibili.com",
+        target: "http://localhost:4000",
         changeOrigin: true, //开启代理
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

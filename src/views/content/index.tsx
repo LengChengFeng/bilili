@@ -1,6 +1,7 @@
+import { Toast } from "antd-mobile";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { getHotSinger, getSingerMuisc } from "../../network/content";
+import { getHotSinger} from "../../network/content";
 export default function index() {
   const [singer, setSinger] = useState<any>(null);
   const navigate = useNavigate();
@@ -11,6 +12,13 @@ export default function index() {
   }, []);
   const handleClick = (item: any) => {
     console.log(item);
+    const token = JSON.parse(window.localStorage.getItem("token") as any) || []
+    if(!token) {
+      Toast.show({
+        content:"请先登录~"
+      })
+      return false
+    }
     navigate(`/song/${item.id}`, {
       state: { name: item.name, url: item.img1v1Url },
     });

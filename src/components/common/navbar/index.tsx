@@ -34,7 +34,7 @@ const navBar = (props: any) => {
     const info =
       JSON.parse(window.localStorage.getItem("userinfo") as any) || [];
     setUserInfo(info);
-  }, [userInfo && userInfo.avatarUrl]);
+  }, []);
 
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const formRef = useRef<any>();
@@ -45,6 +45,11 @@ const navBar = (props: any) => {
         loginByPhone({ phone, captcha: verifyCode }).then((res: any) => {
           if (res.code == "200") {
             console.log(res);
+            
+            window.localStorage.setItem(
+              "token",
+              JSON.stringify(res.token)
+            );
             window.localStorage.setItem(
               "userinfo",
               JSON.stringify(res.profile)

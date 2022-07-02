@@ -3,13 +3,22 @@ import ReactDOM from "react-dom/client";
 import { message, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import "./index.css";
-const baseURL = "http://localhost:4000";
+const baseURL = "/api";
 const service = axios.create({
   timeout: 50000, // 请求超时时间
   baseURL,
 });
 
 service.interceptors.request.use((config) => {
+  const token = JSON.parse(window.localStorage.getItem("token") as any) || []
+  console.log(token);
+  
+  
+  if (token) {
+    if (config.headers) {
+      config.headers.Authorization = token;
+    }
+  }
   showLoading();
   return config;
 });
@@ -19,6 +28,8 @@ service.interceptors.response.use(
     return res.data;
   },
   (err) => {
+    console.log(err);
+    
     const ErrorStatus = err.response.status;
     hideLoading();
     if (ErrorStatus === 404) {

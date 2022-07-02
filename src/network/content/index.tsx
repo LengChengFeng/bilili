@@ -6,10 +6,19 @@ export function getHotSinger() {
   });
 }
 
-export function getSingerMuisc(params: any) {
+export function getSingerMusic(params: any) {
   return request({
     url: "/artist/songs",
     method: "get",
     params,
   });
+}
+
+//播放歌曲
+export function getMusicUrl(params: any) {
+  return request({
+    url: "/song/url",
+    method: "get",
+    params,
+  })
 }

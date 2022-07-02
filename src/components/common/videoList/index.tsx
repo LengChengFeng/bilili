@@ -13,6 +13,13 @@ const videoList = (props: any) => {
         content: "此歌曲没有MV",
       });
     } else {
+      const token = JSON.parse(window.localStorage.getItem("token") as any) || []
+      if(!token) {
+        Toast.show({
+          content:"请先登录~"
+        })
+        return false
+      }
       navigate(`/mv/${item.mv}`);
     }
   };
